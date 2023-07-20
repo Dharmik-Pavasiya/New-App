@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -16,7 +16,13 @@ class HomeController extends GetxController {
   RxList<CategoryModel> categories = <CategoryModel>[].obs;
   Rx<ArticleModel> articleModel = ArticleModel().obs;
 
+  Rx<TextEditingController> searchController = TextEditingController().obs;
+
   RxBool isLoading = false.obs;
+
+  RxBool isSearchBar = false.obs;
+
+  RxString searchText = "".obs;
 
   @override
   void onInit() {
@@ -28,7 +34,10 @@ class HomeController extends GetxController {
   Future<void> getArticle(String category) async {
     setLoading(true);
     String url =
-        "${ApiConstants.BASE_URL}/top-headlines?country=in&category=business&apiKey=${ApiConstants.API_KEY}&q=$category";
+        "${ApiConstants.BASE_URL}/everything?q=${category.isEmpty ? "business" : category}&apiKey=${ApiConstants.API_KEY}";
+
+    print("Fired Url : $url");
+
     var response = await http.get(Uri.parse(url));
 
     var jsonData = jsonDecode(response.body);

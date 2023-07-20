@@ -17,31 +17,66 @@ class HomeScreen extends GetView<HomeController> {
         backgroundColor: controller.bgColor.value,
         appBar: AppBar(
           centerTitle: true,
-          title: const Text.rich(
-            TextSpan(children: [
-              TextSpan(
-                text: "News ",
-                style: TextStyle(
-                  color: ColorConstants.kBlack,
-                  fontWeight: FontWeight.w500,
+          title: controller.isSearchBar.value
+              ? TextField(
+                  onChanged: (value) {
+                    controller.searchText.value = value;
+                  },
+                  decoration: InputDecoration(
+                    hintText: "Search by word",
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        controller.isSearchBar.value = false;
+
+                        print("Text : ${controller.searchText.value}");
+
+                        controller.getArticle(controller.searchText.value);
+                      },
+                      icon: const Icon(
+                        Icons.search,
+                        color: ColorConstants.kBlue,
+                      ),
+                    ),
+                  ),
+                )
+              : const Text.rich(
+                  TextSpan(children: [
+                    TextSpan(
+                      text: "News ",
+                      style: TextStyle(
+                        color: ColorConstants.kBlack,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    TextSpan(
+                      text: "Journal",
+                      style: TextStyle(
+                        color: ColorConstants.kBlue,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ]),
                 ),
-              ),
-              TextSpan(
-                text: "Journal",
-                style: TextStyle(
-                  color: ColorConstants.kBlue,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ]),
-          ),
         ),
+        floatingActionButton: controller.isSearchBar.value
+            ? Container()
+            : FloatingActionButton(
+                backgroundColor: ColorConstants.kBlack,
+                child: const Icon(
+                  Icons.search,
+                  color: ColorConstants.kBlue,
+                ),
+                onPressed: () {
+                  controller.isSearchBar.value = true;
+                },
+              ),
         body: controller.isLoading.value
             ? const Center(
                 child: CircularProgressIndicator(),
               )
             : Column(
                 children: [
+                  VSpace.spacing_micro,
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16.0,
@@ -55,7 +90,8 @@ class HomeScreen extends GetView<HomeController> {
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
-                              controller.getArticle(controller.categories[index].categoryName!);
+                              controller.getArticle(
+                                  controller.categories[index].categoryName!);
                             },
                             child: CategoryCard(
                               imageUrl: controller.categories[index].imageUrl!,
@@ -74,7 +110,7 @@ class HomeScreen extends GetView<HomeController> {
                       child: ListView.builder(
                         itemCount:
                             controller.articleModel.value.articles!.length,
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
                           print(
                               "Total Length : ${controller.articleModel.value.articles!.length}");
