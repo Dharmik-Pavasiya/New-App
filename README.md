@@ -58,6 +58,6 @@ The New Journal App relies on the following key dependencies:
 
 # APK Link
 
-[Download Link](/https://drive.google.com/file/d/1UmpoGQa7JfKWcacC_00KlhDv3eb2Wtw5/view?usp=sharing)
+[Download Link](https://drive.google.com/file/d/1UmpoGQa7JfKWcacC_00KlhDv3eb2Wtw5/view?usp=sharing)
 
-For a video demonstration of the app, you can watch it [here] (/https://drive.google.com/file/d/15r6V0EcgO_AZijzHDLzNYLd4ZG36HLfg/view?usp=sharing).
+For a video demonstration of the app, you can watch it [here](https://drive.google.com/file/d/15r6V0EcgO_AZijzHDLzNYLd4ZG36HLfg/view?usp=sharing).
