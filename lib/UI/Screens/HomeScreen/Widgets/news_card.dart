@@ -30,7 +30,9 @@ class NewsCard extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(6.0),
-              child: CachedNetworkImage(imageUrl: imageUrl!),
+              child: CachedNetworkImage(
+                imageUrl: imageUrl!,
+              ),
             ),
             Text(
               title!,
@@ -49,6 +51,8 @@ class NewsCard extends StatelessWidget {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
+            VSpace.spacing_tiny,
+            const Divider(thickness: 1),
           ],
         ),
       ),

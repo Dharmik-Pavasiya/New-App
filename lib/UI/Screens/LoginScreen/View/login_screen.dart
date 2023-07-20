@@ -42,7 +42,7 @@ class LoginScreen extends GetView<LoginController> {
                     ),
                   ),
                   VSpace.spacing_large,
-                  InkWell(
+                  GestureDetector(
                     onTap: () {
                       controller.signInWithGoogle(context: context);
                     },

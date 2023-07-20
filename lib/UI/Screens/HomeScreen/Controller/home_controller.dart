@@ -20,6 +20,8 @@ class HomeController extends GetxController {
   RxList<CategoryModel> categories = <CategoryModel>[].obs;
   Rx<ArticleModel> articleModel = ArticleModel().obs;
 
+  RxInt selectedCategory = 8.obs;
+
   FirebaseAuth auth = FirebaseAuth.instance;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();

@@ -89,6 +89,14 @@ class HomeScreen extends GetView<HomeController> {
                   onChanged: (value) {
                     controller.searchText.value = value;
                   },
+                  onSubmitted: (value) {
+                    controller.isSearchBar.value = false;
+
+                    print("Text : ${controller.searchText.value}");
+
+                    controller.getArticle(controller.searchText.value);
+                  },
+                  textInputAction: TextInputAction.search,
                   decoration: InputDecoration(
                     hintText: "Search by word",
                     suffixIcon: IconButton(
@@ -159,11 +167,13 @@ class HomeScreen extends GetView<HomeController> {
                             onTap: () {
                               controller.getArticle(
                                   controller.categories[index].categoryName!);
+                              controller.selectedCategory.value = index;
                             },
                             child: CategoryCard(
                               imageUrl: controller.categories[index].imageUrl!,
                               categoryName:
                                   controller.categories[index].categoryName!,
+                              index: index,
                             ),
                           );
                         },

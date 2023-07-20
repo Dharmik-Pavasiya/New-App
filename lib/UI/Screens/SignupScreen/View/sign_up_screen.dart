@@ -41,7 +41,7 @@ class SignUpScreen extends GetView<SignUpController> {
                     ),
                   ),
                   VSpace.spacing_large,
-                  InkWell(
+                  GestureDetector(
                     onTap: () {
                       controller.signInWithGoogle(context: context);
                     },
