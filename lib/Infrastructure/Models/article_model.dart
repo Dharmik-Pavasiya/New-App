@@ -45,7 +45,7 @@ class Article {
   String? description;
   String? url;
   String? urlToImage;
-  String? publishedAt;
+  DateTime? publishedAt;
   String? content;
 
   Article({
@@ -61,13 +61,15 @@ class Article {
 
   factory Article.fromJson(Map<String, dynamic> json) => Article(
         source: json["source"] == null ? null : Source.fromJson(json["source"]),
-        author: json["author"],
+        author: json["author"].toString(),
         title: json["title"],
         description: json["description"],
         url: json["url"],
-        urlToImage: json["urlToImage"],
-        publishedAt: json["publishedAt"],
-        content: json["content"],
+        urlToImage: json["urlToImage"] ??
+            "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930",
+        publishedAt: json["publishedAt"] == null
+            ? null
+            : DateTime.parse(json["publishedAt"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -77,7 +79,7 @@ class Article {
         "description": description,
         "url": url,
         "urlToImage": urlToImage,
-        "publishedAt": publishedAt,
+        "publishedAt": publishedAt?.toIso8601String(),
         "content": content,
       };
 }
