@@ -5,9 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:newsapp/Infrastructure/Commons/Constants/route_constants.dart';
 
-import '../../../../Infrastructure/Commons/Constants/color_constants.dart';
-
-class SignUpController extends GetxController {
+class LoginController extends GetxController {
   RxBool isLoading = false.obs;
 
   Future<User?> signInWithGoogle({required BuildContext context}) async {
@@ -47,11 +45,7 @@ class SignUpController extends GetxController {
           });
           isLoading.value = false;
         }
-        ScaffoldMessenger.of(context).showSnackBar(
-          customSnackBar(
-            content: 'Login Successfully',
-          ),
-        );
+
         Get.offAllNamed(RouteConstants.homeScreen);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
@@ -87,9 +81,7 @@ class SignUpController extends GetxController {
       backgroundColor: Colors.black,
       content: Text(
         content,
-        style: const TextStyle(
-            color: ColorConstants.kBlue, letterSpacing: 0.5, fontSize: 16.0),
-        textAlign: TextAlign.center,
+        style: TextStyle(color: Colors.redAccent, letterSpacing: 0.5),
       ),
     );
   }

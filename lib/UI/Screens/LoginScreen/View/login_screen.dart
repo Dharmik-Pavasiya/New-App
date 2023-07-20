@@ -3,15 +3,16 @@ import 'package:get/get.dart';
 import 'package:newsapp/Infrastructure/Commons/Constants/color_constants.dart';
 import 'package:newsapp/Infrastructure/Commons/Constants/image_constants.dart';
 import 'package:newsapp/Infrastructure/Dimension/spacing.dart';
-import 'package:newsapp/UI/Screens/SignupScreen/Controller/sign_up_controller.dart';
+import 'package:newsapp/UI/Screens/LoginScreen/Controller/login_controller.dart';
 
-class SignUpScreen extends GetView<SignUpController> {
-  const SignUpScreen({super.key});
+class LoginScreen extends GetView<LoginController> {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return Scaffold(
+    return Obx(
+      () {
+        return Scaffold(
           backgroundColor: ColorConstants.kWhite,
           body: Stack(
             children: [
@@ -23,7 +24,7 @@ class SignUpScreen extends GetView<SignUpController> {
                     TextSpan(
                       children: [
                         TextSpan(
-                          text: 'Welcome to News ',
+                          text: 'Login to News ',
                           style: TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.w600,
@@ -68,7 +69,9 @@ class SignUpScreen extends GetView<SignUpController> {
                           const Text(
                             "Sign In With Google",
                             style: TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.w600),
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ],
                       ),
@@ -82,7 +85,9 @@ class SignUpScreen extends GetView<SignUpController> {
                   child: CircularProgressIndicator(),
                 ),
             ],
-          ));
-    });
+          ),
+        );
+      },
+    );
   }
 }

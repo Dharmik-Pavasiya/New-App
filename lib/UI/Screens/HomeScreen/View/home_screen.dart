@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:newsapp/Infrastructure/Commons/Constants/image_constants.dart';
 import 'package:newsapp/UI/Screens/HomeScreen/Widgets/news_card.dart';
 
 import '../../../../Infrastructure/Commons/Constants/color_constants.dart';
@@ -14,8 +16,73 @@ class HomeScreen extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(() {
       return Scaffold(
+        key: controller.scaffoldKey,
         backgroundColor: controller.bgColor.value,
+        drawer: Drawer(
+          backgroundColor: ColorConstants.kWhite,
+          child: Column(
+            children: [
+              DrawerHeader(
+                decoration: const BoxDecoration(
+                  color: ColorConstants.kWhite,
+                ),
+                curve: Curves.bounceInOut,
+                child: Column(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      child: CircleAvatar(
+                        radius: 48.0,
+                        child: CachedNetworkImage(
+                          imageUrl: "${controller.auth.currentUser!.photoURL}",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    VSpace.spacing_tiny,
+                    Text(
+                      "${controller.auth.currentUser!.displayName}",
+                      style: const TextStyle(
+                        color: ColorConstants.kBlack,
+                        fontSize: 20,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              ListTile(
+                onTap: () {
+                  controller.signOut(context: context);
+                },
+                leading: const Icon(
+                  Icons.exit_to_app,
+                  color: ColorConstants.kBlack,
+                ),
+                title: const Text(
+                  "Logout",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16.0,
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
         appBar: AppBar(
+          leading: InkWell(
+            onTap: () {
+              controller.scaffoldKey.currentState?.openDrawer();
+            },
+            child: Container(
+              padding: const EdgeInsets.all(15.0),
+              child: Image.asset(
+                ImageConstants.drawer,
+                color: ColorConstants.kBlack,
+                height: 24.0,
+              ),
+            ),
+          ),
           centerTitle: true,
           title: controller.isSearchBar.value
               ? TextField(

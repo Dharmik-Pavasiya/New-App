@@ -39,6 +39,10 @@ dependencies:
   http: ^1.1.0
   cached_network_image: ^3.2.3
   webview_flutter: ^4.2.2
+  google_sign_in: ^6.1.4
+  firebase_core: ^2.15.0
+  firebase_auth: ^4.7.1
+  cloud_firestore: ^4.8.3
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +74,7 @@ flutter:
     - assets/
     - assets/gif/
     - assets/png/
+    - assets/jpg/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
